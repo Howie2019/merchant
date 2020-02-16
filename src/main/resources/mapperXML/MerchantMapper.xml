@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.dao.MerchantMapper">
+	<sql id="Base_Column_List" >(merchantNo,custNo,merchantName,merchantAccount,status,address,telephone,createDateTime,createPerson,updateDateTime,updatePerson)</sql>
+	
+	<select id="GetMerchantInfoByID" parameterType="int" resultType="MerchantInfo">
+		select * from `merchant`.`MerchantInfo` where id
+		= #{id}
+	</select>
+	<insert id="create" parameterType="List" useGeneratedKeys="true" keyProperty="id">
+		insert into `merchant`.`MerchantInfo`
+		VALUES
+		<foreach collection="list" item="it" separator=",">
+			(#{it.merchantNo},#{it.custNo},#{it.merchantName},#{it.merchantAccount},#{it.status},#{it.address},#{it.telephone},#{it.createDateTime},#{it.createPerson},#{it.updateDateTime},#{it.updatePerson})
+		</foreach>
+
+	</insert>
+
+	<insert id="createOne" parameterType="MerchantInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into
+		`merchant`.`MerchantInfo`<include refid="Base_Column_List" />
+		VALUE
+		(#{merchantNo},#{custNo},#{merchantName},#{merchantAccount},#{status},#{address},#{telephone},#{createDateTime},#{createPerson},#{updateDateTime},#{updatePerson})
+
+	</insert>
+</mapper>
