@@ -3,8 +3,10 @@
  */
 package com.cd.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import java.lang.reflect.Field;
+import java.util.List;
 import org.junit.Test;
 import com.cd.entity.MerchantInfo;
 
@@ -36,4 +38,13 @@ public class MerchantInfoUtilTest {
 		}
 	}
 
+	@Test
+	public void testRandomMerchantInfoList() {
+		List<MerchantInfo> list = MerchantInfoUtil.randomMerchantInfoList(10);
+		assertEquals(10, list.size());
+		System.out.println(list.size());
+
+		assertNotNull(list);
+		System.out.println(list);
+	}
 }

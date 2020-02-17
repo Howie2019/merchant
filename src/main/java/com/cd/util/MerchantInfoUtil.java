@@ -3,12 +3,19 @@
  */
 package com.cd.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.cd.entity.MerchantInfo;
 
 /**
  * @author Howie
  */
 public abstract class MerchantInfoUtil {
+	/**
+	 * MerchantInfoUtil工厂方法, 生成一个MerchantInfo, 属性随机填写
+	 *
+	 * @return 属性随机的MerchantInfo
+	 */
 	public static MerchantInfo randomMerchantInfo() {
 		String merchantNo = StringUtil.randomDigits(Constants.merchantNo_LEN);
 		String custNo = StringUtil.randomDigits(Constants.custNo_LEN);
@@ -36,5 +43,19 @@ public abstract class MerchantInfoUtil {
 		merchantInfo.setUpdatePerson(updatePerson);
 
 		return merchantInfo;
+	}
+
+	/**
+	 * 得到含有size个MerchantInfo的List, 属性随机填写
+	 * 
+	 * @param size list中MerchantInfo的个数
+	 * @return 含有size个MerchantInfo的List
+	 */
+	public static List<MerchantInfo> randomMerchantInfoList(int size) {
+		List<MerchantInfo> list = new ArrayList<>(size);
+		for (int i = 1; i <= size; i++) {
+			list.add(randomMerchantInfo());
+		}
+		return list;
 	}
 }

@@ -2,8 +2,94 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cd.dao.MerchantMapper">
-	<sql id="Base_Column_List" >(merchantNo,custNo,merchantName,merchantAccount,status,address,telephone,createDateTime,createPerson,updateDateTime,updatePerson)</sql>
+	<sql id="Base_Column_List">(merchantNo,custNo,merchantName,merchantAccount,status,address,telephone,createDateTime,createPerson,updateDateTime,updatePerson)
+	</sql>
+	<sql id="where_clause">
+		<where>
+			<!--动态sql拼装 -->
+			<!--如果属性有值，则加上该条件 -->
+			<if test="id != null">
+				and id =#{id}
+			</if>
+			<if test="merchantNo!= null">
+				and merchantNo=#{merchantNo}
+			</if>
+			<if test="custNo!= null">
+				and custNo=#{custNo}
+			</if>
+			<if test="merchantName!= null">
+				and merchantName=#{merchantName}
+			</if>
+			<if test="merchantAccount!= null">
+				and merchantAccount=#{merchantAccount}
+			</if>
+			<if test="status!= null">
+				and status=#{status}
+			</if>
+			<if test="address!= null">
+				and address=#{address}
+			</if>
+			<if test="telephone!= null">
+				and telephone=#{telephone}
+			</if>
+			<if test="createDateTime!= null">
+				and createDateTime=#{createDateTime}
+			</if>
+			<if test="createPerson!= null">
+				and createPerson=#{createPerson}
+			</if>
+			<if test="updateDateTime!= null">
+				and updateDateTime=#{updateDateTime}
+			</if>
+			<if test="updatePerson!= null">
+				and updatePerson=#{updatePerson}
+			</if>
+		</where>
+	</sql>
+	   <sql id="where_clause_for_set">
+        <where>
+            <!--动态sql拼装 -->
+            <!--如果属性有值，则加上该条件 -->
+            <if test="template.id != null">
+                and id =#{template.id}
+            </if>
+            <if test="template.merchantNo!= null">
+                and merchantNo=#{template.merchantNo}
+            </if>
+            <if test="template.custNo!= null">
+                and custNo=#{template.custNo}
+            </if>
+            <if test="template.merchantName!= null">
+                and merchantName=#{template.merchantName}
+            </if>
+            <if test="template.merchantAccount!= null">
+                and merchantAccount=#{template.merchantAccount}
+            </if>
+            <if test="template.status!= null">
+                and status=#{template.status}
+            </if>
+            <if test="template.address!= null">
+                and address=#{template.address}
+            </if>
+            <if test="template.telephone!= null">
+                and telephone=#{template.telephone}
+            </if>
+            <if test="template.createDateTime!= null">
+                and createDateTime=#{template.createDateTime}
+            </if>
+            <if test="template.createPerson!= null">
+                and createPerson=#{template.createPerson}
+            </if>
+            <if test="template.updateDateTime!= null">
+                and updateDateTime=#{template.updateDateTime}
+            </if>
+            <if test="template.updatePerson!= null">
+                and updatePerson=#{template.updatePerson}
+            </if>
+        </where>
+    </sql>
 	
+
 	<select id="GetMerchantInfoByID" parameterType="int" resultType="MerchantInfo">
 		select * from `merchant`.`MerchantInfo` where id
 		= #{id}
@@ -14,14 +100,93 @@
 		<foreach collection="list" item="it" separator=",">
 			(#{it.merchantNo},#{it.custNo},#{it.merchantName},#{it.merchantAccount},#{it.status},#{it.address},#{it.telephone},#{it.createDateTime},#{it.createPerson},#{it.updateDateTime},#{it.updatePerson})
 		</foreach>
-
 	</insert>
 
 	<insert id="createOne" parameterType="MerchantInfo" useGeneratedKeys="true" keyProperty="id">
 		insert into
-		`merchant`.`MerchantInfo`<include refid="Base_Column_List" />
+		`merchant`.`MerchantInfo`
+		<include refid="Base_Column_List" />
 		VALUE
 		(#{merchantNo},#{custNo},#{merchantName},#{merchantAccount},#{status},#{address},#{telephone},#{createDateTime},#{createPerson},#{updateDateTime},#{updatePerson})
 
 	</insert>
+
+	<insert id="createMany" useGeneratedKeys="true" keyProperty="id">
+		insert into
+		`merchant`.`MerchantInfo`
+		<include refid="Base_Column_List" />
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.merchantNo},#{item.custNo},#{item.merchantName},#{item.merchantAccount},#{item.status},#{item.address},#{item.telephone},#{item.createDateTime},#{item.createPerson},#{item.updateDateTime},#{item.updatePerson})
+		</foreach>
+	</insert>
+
+	<select id="queryOne" resultType="MerchantInfo">
+		select * from `merchant`.`MerchantInfo`
+		<include refid="where_clause" />
+		limit 1
+	</select>
+
+	<select id="queryMany" resultType="MerchantInfo">
+		select * from `merchant`.`MerchantInfo`
+		<include refid="where_clause" />
+	</select>
+
+	<delete id="deleteOne">
+		delete from `merchant`.`MerchantInfo`
+		<include refid="where_clause" />
+		limit 1
+	</delete>
+
+	<delete id="deleteMany">
+		delete from `merchant`.`MerchantInfo`
+		<include refid="where_clause" />
+	</delete>
+
+	<!-- <delete id="deleteMany"> -->
+	<!-- delete from `merchant`.`MerchantInfo` -->
+	<!-- <include refid="where_clause" /> -->
+	<!-- </delete> -->
+
+	<update id="updateOne">
+		update `merchant`.`MerchantInfo`
+		<set>
+			<if test="newMerchantInfo.merchantNo != null">
+				merchantNo = #{newMerchantInfo.merchantNo},
+			</if>
+			<if test="newMerchantInfo.custNo != null">
+				custNo = #{newMerchantInfo.custNo},
+			</if>
+			<if test="newMerchantInfo.merchantName != null">
+				merchantName = #{newMerchantInfo.merchantName},
+			</if>
+			<if test="newMerchantInfo.merchantAccount != null">
+				merchantAccount =#{newMerchantInfo.merchantAccount},
+			</if>
+			<if test="newMerchantInfo.status != null">
+				status =#{newMerchantInfo.status},
+			</if>
+			<if test="newMerchantInfo.address != null">
+				address =#{newMerchantInfo.address},
+			</if>
+			<if test="newMerchantInfo.telephone != null">
+				telephone =#{newMerchantInfo.telephone},
+			</if>
+			<if test="newMerchantInfo.createDateTime != null">
+				createDateTime =#{newMerchantInfo.createDateTime},
+			</if>
+			<if test="newMerchantInfo.createPerson != null">
+				createPerson =#{newMerchantInfo.createPerson},
+			</if>
+			<if test="newMerchantInfo.updateDateTime != null">
+				updateDateTime =#{newMerchantInfo.updateDateTime},
+			</if>
+			<if test="newMerchantInfo.updatePerson != null">
+				updatePerson =#{newMerchantInfo.updatePerson}
+			</if>
+		</set>
+
+		<include refid="where_clause_for_set" />
+	</update>
+
 </mapper>

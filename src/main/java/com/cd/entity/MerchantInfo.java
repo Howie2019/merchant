@@ -1,5 +1,13 @@
 package com.cd.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Accessors(chain = true)
+@Data
+//字段实在太多了, 权衡再三, 选择引入lombok
+//好处: 简化代码, 增加可读性. 代码越多, 出错的可能性却大. 
+//坏处: lombok带有侵入性, 在无插件的eclipse下会报错
 public class MerchantInfo {
 	// 无意义主键
 	private Integer id;
@@ -25,169 +33,4 @@ public class MerchantInfo {
 	private String updateDateTime;
 	// 修改人
 	private String updatePerson;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getMerchantNo() {
-		return merchantNo;
-	}
-
-	public void setMerchantNo(String merchantNo) {
-		this.merchantNo = merchantNo;
-	}
-
-	public String getCustNo() {
-		return custNo;
-	}
-
-	public void setCustNo(String custNo) {
-		this.custNo = custNo;
-	}
-
-	public String getMerchantName() {
-		return merchantName;
-	}
-
-	public void setMerchantName(String merchantName) {
-		this.merchantName = merchantName;
-	}
-
-	public String getMerchantAccount() {
-		return merchantAccount;
-	}
-
-	public void setMerchantAccount(String merchantAccount) {
-		this.merchantAccount = merchantAccount;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
-	public String getCreateDateTime() {
-		return createDateTime;
-	}
-
-	public void setCreateDateTime(String createDateTime) {
-		this.createDateTime = createDateTime;
-	}
-
-	public String getCreatePerson() {
-		return createPerson;
-	}
-
-	public void setCreatePerson(String createPerson) {
-		this.createPerson = createPerson;
-	}
-
-	public String getUpdateDateTime() {
-		return updateDateTime;
-	}
-
-	public void setUpdateDateTime(String updateDateTime) {
-		this.updateDateTime = updateDateTime;
-	}
-
-	public String getUpdatePerson() {
-		return updatePerson;
-	}
-
-	public void setUpdatePerson(String updatePerson) {
-		this.updatePerson = updatePerson;
-	}
-
-	@Override
-	public String toString() {
-		return "MerchantInfo [id=" + id + ", merchantNo=" + merchantNo + ", custNo=" + custNo + ", merchantName=" + merchantName + ", merchantAccount=" + merchantAccount + ", status=" + status + ", address=" + address + ", telephone=" + telephone + ", createDateTime=" + createDateTime + ", createPerson=" + createPerson + ", updateDateTime=" + updateDateTime + ", updatePerson=" + updatePerson + "]";
-	}
-
-	// public static class Builder {
-	// private MerchantInfo merchant = new MerchantInfo();
-	//
-	// public Builder merchantNo(String merchantNo) {
-	// merchant.setMerchantNo(merchantNo);
-	// return this;
-	// }
-	//
-	// public Builder custNo(String custNo) {
-	// merchant.setCustNo(custNo);
-	// return this;
-	// }
-	//
-	// public Builder merchantName(String merchantName) {
-	// merchant.setMerchantName(merchantName);
-	// return this;
-	// }
-	//
-	// public Builder merchantAccount(String merchantAccount) {
-	// merchant.setMerchantAccount(merchantAccount);
-	// return this;
-	// }
-	//
-	// public Builder status(String status) {
-	// merchant.setStatus(status);
-	// return this;
-	// }
-	//
-	// public Builder address(String address) {
-	// merchant.setAddress(address);
-	// return this;
-	// }
-	//
-	// public Builder telephone(String telephone) {
-	// merchant.setTelephone(telephone);
-	// return this;
-	// }
-	//
-	// public Builder createDateTime(String createDateTime) {
-	// merchant.setCreateDateTime(createDateTime);
-	// return this;
-	// }
-	//
-	// public Builder createPerson(String createPerson) {
-	// merchant.setCreatePerson(createPerson);
-	// return this;
-	// }
-	//
-	// public Builder updateDateTime(String updateDateTime) {
-	// merchant.setUpdateDateTime(updateDateTime);
-	// return this;
-	// }
-	//
-	// public Builder updatePerson(String updatePerson) {
-	// merchant.setUpdatePerson(updatePerson);
-	// return this;
-	// }
-	//
-	// public MerchantInfo build() {
-	// return merchant;
-	// }
-	//
-	// }
 }
